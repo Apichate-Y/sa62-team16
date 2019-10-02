@@ -25,6 +25,7 @@
           <v-text-field
             v-model="password"
             label="Password"
+            type="password"
             outlined
           ></v-text-field>
         </v-col>
@@ -41,8 +42,8 @@
               <v-select 
               v-model="clubMember.RegisterClub_id"
               :items="RegisterClubs" 
-              item-text="clubName" 
-              item-value="registerClubid"
+              item-text="club.clubName" 
+              item-value="registerClubId"
               label="ชมรม" 
               outlined></v-select>
             </v-col>
