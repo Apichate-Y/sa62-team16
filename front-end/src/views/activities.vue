@@ -166,7 +166,7 @@ export default {
     // ดึงข้อมูล Employee ใส่ combobox
     getregisterClubs() {
       http
-        .get("/registerClub")
+        .get("/RegisterClub")
         .then(response => {
           this.Aboard = response.data;
           console.log(response.data);

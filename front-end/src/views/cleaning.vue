@@ -39,7 +39,7 @@
                 label="รหัสนักศึกษา"
                 v-model="CleanUp.clubmembers_id"
                 :items="clubmembers"
-                item-text="user"
+                item-text="user.id_student"
                 item-value="id"
                 :rules="[(v) => !!v || 'โปรดเลือกรหัสนักศึกษา']"
                 required
@@ -116,7 +116,7 @@ export default {
           text: "รหัสนักศึกษา",
           align: "left",
           sortable: false,
-          value: "clubMember.user"
+          value: "clubMember.user.id_student"
         },
         { text: "วัน", value: "dayOfWeek.day" },
         { text: "ช่วงเวลา", value: "duration.durationtime" }
