@@ -35,6 +35,11 @@ public class ClubMemberController {
 
     @GetMapping("/clubmember")
     public Collection<ClubMember> ClubMembers() {
+        return clubMemberRepository.findAll().stream().collect(Collectors.toList());
+    }
+
+    @GetMapping("/ClubMember")
+    public Collection<ClubMember> ClubMemberss() {
         return clubMemberRepository.findAll().stream().filter(s -> s.getStatusmember().equals(false))
                 .collect(Collectors.toList());
     }
@@ -67,6 +72,7 @@ public class ClubMemberController {
         newclubMember.setUsername(username);
         newclubMember.setPassword(password);
         newclubMember.setRegisterDate(new Date());
+        newclubMember.setStatusmember(false);
 
         return clubMemberRepository.save(newclubMember);
     }
