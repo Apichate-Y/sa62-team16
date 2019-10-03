@@ -7,7 +7,7 @@
         <span class="font-weight-light">club</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn text class="teal--text">
+      <v-btn text class="teal--text" @click="$router.push('/')">
         <span>Sign Out</span>
         <v-icon right>exit_to_app</v-icon>
       </v-btn>
@@ -54,6 +54,3 @@ export default {
   }
 };
 </script>
-
-<style>
-</style>
