@@ -43,7 +43,7 @@
               </v-card-text>
               <v-card-actions class="justify-center">
                 <v-btn color="primary" @click="$router.push('/registerclubmember')">สมัครสมาชิก</v-btn>
-                <v-btn color="primary" @click="$router.push('/navbar')">เข้าสู่ระบบ</v-btn>
+                <v-btn color="primary" @click="$router.push('/dashboard')">เข้าสู่ระบบ</v-btn>
               </v-card-actions>
               <br>
             </v-card>
@@ -53,9 +53,3 @@
     </v-content>
   </v-app>
 </template>
-
-<script>
-  export default {
-
-  }
-</script>
