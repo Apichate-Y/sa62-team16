@@ -1,146 +1,156 @@
 <template>
-<v-flex class="mt-1">
-  <v-card max-width="1000" class="mx-auto">
-    <div class="teal darken-1 text-center">
-      <v-layout justify-center>
-        <v-card-title class="white--text">สร้างกิจกรรมชมรม</v-card-title>
-      </v-layout>
-    </div>
-
-    <v-container>
-      <v-row>
-        <v-col class="d-flex" cols="12" sm="6">
-          <v-select
-            v-model="activity.registerClubId"
-            label="ชมรม"
-            outlined
-            :items="Aboard"
-            item-text="clubname"
-            item-value="registerClubId"
-            :rules="[(v) => !!v || 'กรุณาเลือกชมรม']"
-            required
-          ></v-select>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12" sm md="6">
-          <v-text-field label="ชื่อกิจกรรม" v-model="Aname" 
-          :rules="[(v) => !!v || 'กรุณากรอกข้อมูล']"
-            requiredoutlined></v-text-field>
-        </v-col>
-
-        <v-col class="d-flex" cols="12" sm="6">
-          <v-select
-            v-model="activity.TypeId"
-            label="ประเภทกิจกรรม"
-            outlined
-            :items="Atype"
-            item-text="typename"
-            item-value="typeId"
-            :rules="[(v) => !!v || 'กรุณาเลือกประเภทกิจกกรม']"
-            required
-          ></v-select>
-        </v-col>
-      </v-row>
-
-      <v-row>
-        <v-col cols="12" sm="6" md="6">
-          <v-menu
-            v-model="menu"
-            :close-on-content-click="false"
-            :nudge-right="40"
-            transition="scale-transition"
-            offset-y
-            full-width
-            min-width="290px"
-          >
-            <template v-slot:activator="{ on }">
-              <v-text-field
-                v-model="date"
-                label="วันที่เริ่มกิจกรรม"
-                prepend-icon="event"
-                readonly
-                v-on="on"
-              ></v-text-field>
-            </template>
-            <v-date-picker v-model="date" @input="menu = false"></v-date-picker>
-          </v-menu>
-        </v-col>
-        <v-col cols="12" sm="6" md="4">
-          <v-menu
-            v-model="menu2"
-            :close-on-content-click="false"
-            :nudge-right="40"
-            transition="scale-transition"
-            offset-y
-            full-width
-            min-width="290px"
-          >
-            <template v-slot:activator="{ on }">
-              <v-text-field
-                v-model="date2"
-                label="วันที่สิ้นสุดกิจกรรม"
-                prepend-icon="event"
-                readonly
-                v-on="on"
-              ></v-text-field>
-            </template>
-            <v-date-picker v-model="date2" @input="menu2 = false"></v-date-picker>
-          </v-menu>
-        </v-col>
-      </v-row>
-
-      <v-row>
-        <v-col class="d-flex" cols="12" sm="6">
-          <v-select
-            label="ภาคเรียนที่"
-            v-model="activity.TermId"
-            outlined
-            :items="Aterm"
-            item-text="termname"
-            item-value="termId"
-            :rules="[(v) => !!v || 'กรุณาเลือกภาคเรียน']"
-            required
-          ></v-select>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12" sm md="6">
-          <v-text-field
-            v-model="venue"
-            label="สถานที่จัดกิจกรรม"
-            outlined
-            :rules="[(v) => !!v || 'กรุณากรอกข้อมูล']"
-            required
-          ></v-text-field>
-        </v-col>
-
-        <v-col cols="12" sm md="6">
-          <v-text-field
-            v-model="recrutis"
-            label="จำนวนที่รับสมัคร"
-            outlined
-            :rules="[(v) => !!v || 'กรุณากรอกข้อมูล']"
-            required
-          ></v-text-field>
-        </v-col>
-      </v-row>
-
-      <template>
-        <div class="text-center">
-          <v-btn @click="saveActivity" color="indigo" dark large>บันทึกข้อมูล</v-btn>
+  <div>
+    <NavBar></NavBar>
+    <v-flex class="mt-2">
+      <v-card max-width="1000" class="mx-auto">
+        <div class="teal darken-1 text-center">
+          <v-layout justify-center>
+            <v-card-title class="white--text">สร้างกิจกรรมชมรม</v-card-title>
+          </v-layout>
         </div>
-      </template>
-    </v-container>
-  </v-card>
-  </v-flex>
+
+        <v-container>
+          <v-row>
+            <v-col class="d-flex" cols="12" sm="6">
+              <v-select
+                v-model="activity.registerClubId"
+                label="ชมรม"
+                outlined
+                :items="Aboard"
+                item-text="club.clubName"
+                item-value="registerClubId"
+                :rules="[(v) => !!v || 'กรุณาเลือกชมรม']"
+                required
+              ></v-select>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12" sm md="6">
+              <v-text-field
+                label="ชื่อกิจกรรม"
+                v-model="Aname"
+                :rules="[(v) => !!v || 'กรุณากรอกข้อมูล']"
+                requiredoutlined
+              ></v-text-field>
+            </v-col>
+
+            <v-col class="d-flex" cols="12" sm="6">
+              <v-select
+                v-model="activity.TypeId"
+                label="ประเภทกิจกรรม"
+                outlined
+                :items="Atype"
+                item-text="typename"
+                item-value="typeId"
+                :rules="[(v) => !!v || 'กรุณาเลือกประเภทกิจกกรม']"
+                required
+              ></v-select>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="12" sm="6" md="6">
+              <v-menu
+                v-model="menu"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                transition="scale-transition"
+                offset-y
+                full-width
+                min-width="290px"
+              >
+                <template v-slot:activator="{ on }">
+                  <v-text-field
+                    v-model="date"
+                    label="วันที่เริ่มกิจกรรม"
+                    prepend-icon="event"
+                    readonly
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-date-picker v-model="date" @input="menu = false"></v-date-picker>
+              </v-menu>
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-menu
+                v-model="menu2"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                transition="scale-transition"
+                offset-y
+                full-width
+                min-width="290px"
+              >
+                <template v-slot:activator="{ on }">
+                  <v-text-field
+                    v-model="date2"
+                    label="วันที่สิ้นสุดกิจกรรม"
+                    prepend-icon="event"
+                    readonly
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-date-picker v-model="date2" @input="menu2 = false"></v-date-picker>
+              </v-menu>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col class="d-flex" cols="12" sm="6">
+              <v-select
+                label="ภาคเรียนที่"
+                v-model="activity.TermId"
+                outlined
+                :items="Aterm"
+                item-text="termname"
+                item-value="termId"
+                :rules="[(v) => !!v || 'กรุณาเลือกภาคเรียน']"
+                required
+              ></v-select>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12" sm md="6">
+              <v-text-field
+                v-model="venue"
+                label="สถานที่จัดกิจกรรม"
+                outlined
+                :rules="[(v) => !!v || 'กรุณากรอกข้อมูล']"
+                required
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="12" sm md="6">
+              <v-text-field
+                v-model="recrutis"
+                label="จำนวนที่รับสมัคร"
+                outlined
+                :rules="[(v) => !!v || 'กรุณากรอกข้อมูล']"
+                required
+              ></v-text-field>
+            </v-col>
+          </v-row>
+
+          <template>
+            <div class="text-center">
+              <v-btn @click="saveActivity" color="indigo" dark large>บันทึกข้อมูล</v-btn>
+            </div>
+          </template>
+        </v-container>
+      </v-card>
+    </v-flex>
+  </div>
 </template>
 
 <script>
 import http from "../http-common";
+import NavBar from "../components/NavBar";
 
 export default {
   name: "Activity",
+  components: {
+    NavBar
+  },
   data() {
     return {
       activity: {
@@ -156,7 +166,8 @@ export default {
       Atype: [],
       Aterm: [],
       Aname: "",
-      venue: ""
+      venue: "",
+      recrutis: ""
     };
   },
 
@@ -218,11 +229,11 @@ export default {
             this.venue +
             "/" +
             this.recrutis,
-            this.activity
+          this.activity
         )
         .then(response => {
           console.log(response);
-          alert("บันทึกข้อมูลสำเร็จ")
+          alert("บันทึกข้อมูลสำเร็จ");
           window.location.reload();
         })
         .catch(e => {

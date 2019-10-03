@@ -1,22 +1,26 @@
 <template>
-  <v-flex class="mt-2">
-    <v-container>
-      <v-card max-width="auto" class="mx-auto">
-        <v-card-title>รายรับ-รายจ่าย</v-card-title>
-        
-        <v-container fluid>
-          <v-row>
-        <v-col cols="12" sm="6" md="4">
-                <v-text-field label="รายการ" v-model="expensename"
-                :rules="[(v) => !!v || 'Item is required']"
+  <div>
+    <NavBar></NavBar>
+    <v-flex class="mt-2">
+      <v-container>
+        <v-card max-width="auto" class="mx-auto">
+          <div class="teal darken-1 text-center">
+          <v-card-title class="title white--text">รายรับ-รายจ่าย</v-card-title>
+          </div>
+          <v-container fluid>
+            <v-row>
+              <v-col cols="12" sm="6" md="4">
+                <v-text-field
+                  label="รายการ"
+                  v-model="expensename"
+                  :rules="[(v) => !!v || 'Item is required']"
                 ></v-text-field>
               </v-col>
-           
-          </v-row>
-        </v-container>
-        <v-container fluid>
-          <v-row>
-             <v-col class="d-flex" cols="12" sm="2">
+            </v-row>
+          </v-container>
+          <v-container fluid>
+            <v-row>
+              <v-col class="d-flex" cols="12" sm="2">
                 <v-select
                   v-model="income.expid"
                   :items="exptype"
@@ -27,7 +31,7 @@
                 ></v-select>
               </v-col>
 
-            <v-col class="d-flex" cols="12" sm="2">
+              <v-col class="d-flex" cols="12" sm="2">
                 <v-select
                   v-model="income.cateid"
                   :items="category"
@@ -38,7 +42,7 @@
                 ></v-select>
               </v-col>
 
-            <v-col class="d-flex" cols="12" sm="2">
+              <v-col class="d-flex" cols="12" sm="2">
                 <v-select
                   v-model="income.statid"
                   :items="status"
@@ -49,53 +53,62 @@
                 ></v-select>
               </v-col>
 
-            <v-col cols="5" sm="2" md="2">
-                <v-text-field label="จำนวนเงิน" v-model="amount"
-                :rules="[(v) => !!v || 'Item is required']"
+              <v-col cols="5" sm="2" md="2">
+                <v-text-field
+                  label="จำนวนเงิน"
+                  v-model="amount"
+                  :rules="[(v) => !!v || 'Item is required']"
                 ></v-text-field>
               </v-col>
-              
+
+              <v-row justify="center">
+                <v-col cols="12">
+                  <v-btn @click="saveIncome" color="blue-grey darken-2" dark>บันทึกรายการ</v-btn>
+                </v-col>
+              </v-row>
+            </v-row>
+          </v-container>
+          <v-container>
+            <v-layout text-left wrap>
+              <v-flex mb-4>
+                <br />
+                <h1 class="display-1 font-bold mb-1">ตารางรายรับ-รายจ่าย</h1>
+              </v-flex>
+            </v-layout>
+
             <v-row justify="center">
               <v-col cols="12">
-                <v-btn @click="saveIncome" color="blue-grey darken-2" dark>บันทึกรายการ</v-btn>
-                
+                <v-data-table
+                  :headers="headers"
+                  :items="items"
+                  :items-per-page="5"
+                  class="elevation-1"
+                ></v-data-table>
               </v-col>
-            </v-row> 
-               </v-row> 
-                 
-        </v-container>
-       <v-container>
-    <v-layout text-left wrap>
-      <v-flex mb-4>
-        <br />
-        <h1 class="display-1 font-bold mb-1">ตารางรายรับ-รายจ่าย</h1>
-      </v-flex>
-    </v-layout>
-
-    <v-row justify="center">
-      <v-col cols="12">
-        <v-data-table :headers="headers" :items="items" :items-per-page="5" class="elevation-1">
-        </v-data-table>
-      </v-col>
-    </v-row>
-  </v-container>
-      </v-card>   
-    </v-container>
-  </v-flex>
-  
+            </v-row>
+          </v-container>
+        </v-card>
+      </v-container>
+    </v-flex>
+  </div>
 </template>
 
 
 <script>
-import http from "../http-common"; 
-export default {  
+import http from "../http-common";
+import NavBar from "../components/NavBar";
+
+export default {
   name: "Income",
+  components: {
+    NavBar
+  },
   data() {
     return {
       income: {
-       expid:"",
-       cateid:"",
-       statid:""
+        expid: "",
+        cateid: "",
+        statid: ""
       },
       headers: [
         {
@@ -107,16 +120,17 @@ export default {
         { text: "ประเภท", value: "exp_id.typename" },
         { text: "หมวด", value: "cate_id.categoryname" },
         { text: "สถานะ", value: "st_id.statusname" },
-        { text: "จำนวนเงิน", value:"amount"}
+        { text: "จำนวนเงิน", value: "amount" }
       ],
-       exptype:[],
-        category:[],
-        status:[],
-        expensename:"",
-        amount:"",
-         valid:false,
-         check:false,
-        items:[]
+      exptype: [],
+      category: [],
+      status: [],
+      expensename: "",
+      amount: "",
+      valid: false,
+      check: false,
+      items: [],
+      clubmembers_id:""
     };
   },
   methods: {
@@ -144,7 +158,7 @@ export default {
           console.log(e);
         });
     },
-     getStatus() {
+    getStatus() {
       http
         .get("/statuse")
         .then(response => {
@@ -156,21 +170,21 @@ export default {
         });
     },
 
-  saveIncome() {
+    saveIncome() {
       http
         .post(
           "/incomes/" +
-            this. expensename+
+            this.expensename +
             "/" +
-            this.income.expid+
-            "/"+
-            this.income.cateid+
-            "/"+
-            this.income.statid+
-            "/"+
+            this.clubmembers_id +
+            "/" +
+            this.income.expid +
+            "/" +
+            this.income.cateid +
+            "/" +
+            this.income.statid +
+            "/" +
             this.amount
-            
-          
         )
         .then(response => {
           console.log(response);
@@ -178,7 +192,6 @@ export default {
         })
         .catch(e => {
           console.log(e);
-          
         });
     },
     getIncome() {
@@ -190,15 +203,13 @@ export default {
         })
         .catch(e => {
           console.log(e);
-          
         });
     },
-   refreshList() {
-       this.getExpenselists();
-       this.getGroups();
-       this.getStatus();
-       this.getIncome();
-    
+    refreshList() {
+      this.getExpenselists();
+      this.getGroups();
+      this.getStatus();
+      this.getIncome();
     }
     /* eslint-enable no-console */
   },
@@ -207,8 +218,6 @@ export default {
     this.getGroups();
     this.getStatus();
     this.getIncome();
-     
-  },
-   
-  };
+  }
+};
 </script>

@@ -4,7 +4,7 @@
       height="150"
       dark
       prominent
-      src="https://www.wallpapermaiden.com/wallpaper/5458/download/1980x1080/minimalism-scenic-toon-colors-deer-sun-forest-trees-mountain.jpg"
+      src="../assets/wallpaper-2.jpg"
     >
       <v-toolbar-title  class="display-1">สมัครสมาชิกชมรม</v-toolbar-title>
     </v-toolbar>
@@ -59,6 +59,9 @@
           </v-row>
         </v-container>
         <div class="text-center">
+          <v-btn @click="$router.push('/userlogin')" class="ma-2" color="warning">
+            <v-icon left>keyboard_backspace</v-icon>ย้อนกลับ
+          </v-btn>
           <v-btn @click="saveclubMember" class="ma-2" color="success">
             <v-icon left>done</v-icon>ยืนยัน
           </v-btn>
@@ -144,6 +147,7 @@ export default {
         .then(response => {
           console.log(response);
           alert("บันทึกสำเร็จ");
+          this.$router.push('/userlogin')
         })
         .catch(e => {
           console.log(e);
