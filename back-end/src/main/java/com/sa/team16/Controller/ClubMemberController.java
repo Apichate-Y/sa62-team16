@@ -52,7 +52,7 @@ public class ClubMemberController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("/clubMember/{username}/{password}/{User_id}/{RegisterClub_id}/{PositionClub_id}")
+    @PostMapping("/clubmember/{username}/{password}/{User_id}/{RegisterClub_id}/{PositionClub_id}")
     public ClubMember newclubMember(ClubMember newclubMember, @PathVariable String username,
             @PathVariable String password, @PathVariable long RegisterClub_id, @PathVariable long PositionClub_id,
             @PathVariable long User_id) {
