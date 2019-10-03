@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import UserLogin from "./components/UserLogin.vue"
+import MainLogin from "./components/MainLogin.vue"
+import AdminLogin from "./components/AdminLogin.vue"
 import Dashboard from './views/dashboard.vue'
 import Cleaning from './views/cleaning.vue'
 import Income from './views/income.vue'
 import Activities from './views/activities.vue'
-import NavBar from "./components/NavBar.vue";
-import UserLogin from "./components/UserLogin.vue"
-import MainLogin from "./components/MainLogin.vue"
-import AdminLogin from "./components/AdminLogin.vue"
 import RegisterClubmember from "./views/registerclubmember.vue"
 import RegisterClub from "./views/registerclub.vue"
+import RegisterActivity from "./views/registeractivity.vue"
 
 Vue.use(Router)
 
@@ -18,7 +18,7 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/mainlogin',
+      path: '/',
       name: 'mainlogin',
       component: MainLogin
     },
@@ -33,11 +33,6 @@ export default new Router({
       component: UserLogin
     },
     {
-      path: '/navbar',
-      name: 'navbar',
-      component: NavBar
-    },
-    {
       path: '/registerclub',
       name: 'registerclub',
       component: RegisterClub
@@ -49,7 +44,7 @@ export default new Router({
     }
     ,
     {
-      path: '/',
+      path: '/dashboard',
       name: 'dashboard',
       component: Dashboard
     },
@@ -67,6 +62,11 @@ export default new Router({
       path: '/activities',
       name: 'activities',
       component: Activities
+    },
+    {
+      path: '/registeractivity',
+      name: 'registeractivity',
+      component: RegisterActivity
     }
   ]
 })
