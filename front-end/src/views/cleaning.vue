@@ -134,8 +134,6 @@ export default {
       search: "",
       note: "",
       valid: false,
-      dialog: false,
-      user: ""
     };
   },
   methods: {
@@ -168,7 +166,7 @@ export default {
     // ดึงข้อมูล ClubMember ใส่ combobox
     getClubMembers() {
       http
-        .get("/clubmember")
+        .get("/ClubMember")
         .then(response => {
           this.clubmembers = response.data;
           console.log(this.clubmembers);

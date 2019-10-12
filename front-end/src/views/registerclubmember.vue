@@ -133,7 +133,7 @@ export default {
     saveclubMember() {
       http
         .post(
-          "/clubMember/" +
+          "/clubmember/" +
             this.username +
             "/" +
             this.password +

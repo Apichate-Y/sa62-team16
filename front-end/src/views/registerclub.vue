@@ -228,6 +228,7 @@ export default {
         )
         .then(responses => {
           console.log(responses);
+          this.getClub();
           this.dialog = true;
         })
         .catch(e => {
