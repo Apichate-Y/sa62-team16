@@ -34,7 +34,7 @@ public class ClubMemberController {
     }
 
     @GetMapping("/clubmember")
-    public Collection<ClubMember> ClubMembers() {
+    public Collection<ClubMember> clubMembers() {
         return clubMemberRepository.findAll().stream().collect(Collectors.toList());
     }
 
@@ -51,10 +51,10 @@ public class ClubMemberController {
     }
 
     @GetMapping("/clubmember/{username}/{password}")
-    public Collection<ClubMember> ClubMembers(@PathVariable String username, @PathVariable String password) {
+    public ClubMember clubMemberss(@PathVariable String username, @PathVariable String password) {
         return clubMemberRepository.findAll().stream()
                 .filter(s -> s.getUsername().equals(username) && s.getPassword().equals(password))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()).get(0);
     }
 
     @PostMapping("/clubmember/{username}/{password}/{User_id}/{RegisterClub_id}/{PositionClub_id}")

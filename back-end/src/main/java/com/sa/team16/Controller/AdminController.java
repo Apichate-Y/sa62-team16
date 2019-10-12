@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -24,10 +23,9 @@ public class AdminController {
     }
 
     @GetMapping("/admin/{adminusername}/{adminpassword}")
-    public Collection<Admin> Admins(@PathVariable String adminusername, @PathVariable String adminpassword) {
+    public Admin Admins(@PathVariable String adminusername, @PathVariable String adminpassword) {
         return adminRepository.findAll().stream()
                 .filter(s -> s.getAdminpassword().equals(adminusername) && s.getAdminpassword().equals(adminpassword))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()).get(0);
     }
-
 }
