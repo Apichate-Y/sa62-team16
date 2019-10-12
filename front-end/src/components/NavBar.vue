@@ -7,7 +7,7 @@
         <span class="font-weight-light">club</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn text class="teal--text" @click="$router.push('/')">
+      <v-btn text class="teal--text" @click="$router.push('/userlogin')">
         <span>Sign Out</span>
         <v-icon right>exit_to_app</v-icon>
       </v-btn>
@@ -19,11 +19,11 @@
           <v-avatar size="150">
             <img src="../assets/avatar-2.png" alt />
           </v-avatar>
-          <h1 class="title white--text headline ">COMPUTER CLUB</h1>
+          <h1 class="title white--text headline ">Computer Club</h1>
         </v-flex>
       </v-layout>
 
-      <v-divider class=""></v-divider>
+      <v-divider ></v-divider>
 
       <v-list>
         <v-list-item v-for="item in items" :key="item.title" router :to="item.route">
@@ -44,6 +44,7 @@ export default {
   data() {
     return {
       drawer: true,
+      member:"",
       items: [
         { icon: "dashboard", title: "Dashboard", route: "/dashboard" },
         { icon: "table_chart", title: "จัดเวรทำความสะอาด", route: "/cleaning" },
