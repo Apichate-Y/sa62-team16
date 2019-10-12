@@ -27,19 +27,34 @@ public class ClubMemberDataloader implements ApplicationRunner {
 		});
 
 		User User1 = new User();
-		User1.setId_student("B6010256");
-		User1.setName("Siriluk");
+		User1.setId_student("B5917099");
+		User1.setName("Apichate");
 		userRepository.save(User1);
 
 		User User2 = new User();
-		User2.setId_student("B6005924");
-		User2.setName("jirawan");
+		User2.setId_student("B5917440");
+		User2.setName("Nopparat");
 		userRepository.save(User2);
 
 		User User3 = new User();
-		User3.setId_student("B6005900");
-		User3.setName("Kanokporn");
+		User3.setId_student("B6001025");
+		User3.setName("Wittawat");
 		userRepository.save(User3);
+
+		User User4 = new User();
+		User4.setId_student("B6005900");
+		User4.setName("Kanokporn");
+		userRepository.save(User4);
+
+		User User5 = new User();
+		User5.setId_student("B6005924");
+		User5.setName("Jirawan");
+		userRepository.save(User5);
+
+		User User6 = new User();
+		User6.setId_student("B6010256");
+		User6.setName("Siriluk");
+		userRepository.save(User6);
 
 		userRepository.findAll().forEach(System.out::println);
 		positionClubRepository.findAll().forEach(System.out::println);

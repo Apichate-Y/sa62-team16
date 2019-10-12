@@ -18,7 +18,7 @@ public class AdminDataloader implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 
 		Admin Admin = new Admin();
-		Admin.setAdminpassword("Admin");
+		Admin.setAdminusername("Admin");
 		Admin.setAdminpassword("Admin");
 		adminRepository.save(Admin);
 
