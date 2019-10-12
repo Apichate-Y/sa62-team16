@@ -1,17 +1,40 @@
 <template>
+  
+  <v-card>
+    <v-carousel cycle height="690" hide-delimiter-background show-arrows-on-hover>
 
-    <v-flex style="margin-top:15%">
-      <v-card max-width="500" height="auto" class="mx-auto elevation-10" color="grey lighten-5">
-        <v-row justify="center" >
-          <v-col class="text-center" cols="12">
-            <div class="my-12">
-              <v-btn color="primary" @click="$router.push('/adminlogin')">เข้าสู่ระบบในฐานะผู้ดูแลระบบ</v-btn>
-            </div>
-            <div class="my-12">
-              <v-btn color="primary" @click="$router.push('/userlogin')">เข้าสู่ระบบในฐานะสมาชิก</v-btn>
-            </div>
-          </v-col>
-        </v-row>
-      </v-card>
-    </v-flex>
+      <v-carousel-item v-for="(item,i) in itemss" :key="i" :src="item.src">
+                <div class="display-1"> </div>      
+      </v-carousel-item>
+
+
+    </v-carousel>
+
+    <v-card-actions class="justify-center">
+      <v-btn text color="primary" @click="$router.push('/adminlogin')">Admin</v-btn>
+      <v-btn rounded color="primary" dark large @click="$router.push('/userlogin')">Member</v-btn>
+    </v-card-actions> 
+  </v-card>
 </template>
+
+<script>
+
+  export default {
+    data () {
+      return {
+        itemss: [
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+          },
+           {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+          },
+         {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
+          },
+        ],
+      }
+    },
+  }
+
+</script>

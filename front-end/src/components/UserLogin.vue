@@ -1,55 +1,108 @@
 <template>
   <v-app id="inspire">
     <v-content>
-      <v-container
-        class="fill-height"
-        fluid
+      <div
+        class="img-background"
+        v-bind:style="{'background-image': 'url(' + require('../assets/UserOne.jpg') + ')'}"
       >
-        <v-row
-          align="center"
-          justify="center"
-        >
-          <v-col
-            cols="12"
-            sm="8"
-            md="4"
-          >
-            <v-card class="elevation-12">
-              <v-toolbar
-                color="primary"
-                dark
-                flat
-              >
-                <v-toolbar-title>เข้าสู่ระบบสำหรับสมาชิก</v-toolbar-title>
-                <div class="flex-grow-1"></div>
-              </v-toolbar>
-              <v-card-text>
-                <v-form>
-                  <v-text-field
-                    label="๊Username"
-                    name="login"
-                    prepend-icon="person"
-                    type="text"
-                  ></v-text-field>
+        <v-container class="fill-height" fluid>
+          <v-row align="center" justify="center">
+            <v-col md="8">
+              <v-card class="elevation-12">
+                <v-row class="mx-auto">
+                  <v-img height="mx-auto" width="325" dark src="../assets/UserTwo.jpg"></v-img>
 
-                  <v-text-field
-                    id="password"
-                    label="Password"
-                    name="password"
-                    prepend-icon="lock"
-                    type="password"
-                  ></v-text-field>
-                </v-form>
-              </v-card-text>
-              <v-card-actions class="justify-center">
-                <v-btn color="primary" @click="$router.push('/registerclubmember')">สมัครสมาชิก</v-btn>
-                <v-btn color="primary" @click="$router.push('/dashboard')">เข้าสู่ระบบ</v-btn>
-              </v-card-actions>
-              <br>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
+                  <v-col class="text-center" md="mx-auto">
+                    <v-container class="mx-auto">
+                      <v-row class="justify-center">
+                        <v-icon size="50" color="teal darken-4">account_circle</v-icon>
+                        <v-card-text>
+                          <h1>Member</h1>
+                          <v-form>
+                            <v-text-field
+                              label="๊Username"
+                              name="login"
+                              v-model="username"
+                              prepend-icon="person"
+                              type="text"
+                            ></v-text-field>
+
+                            <v-text-field
+                              id="password"
+                              label="Password"
+                              name="password"
+                              v-model="password"
+                              prepend-icon="lock"
+                              type="password"
+                            ></v-text-field>
+                          </v-form>
+                        </v-card-text>
+
+                        <v-card-actions class="justify-center">
+                          <v-btn
+                            text
+                            color="primary"
+                            @click="$router.push('/registerclubmember')"
+                          >Sign up</v-btn>
+
+                          <v-btn
+                            rounded
+                            color="primary"
+                            dark
+                            large
+                            @click="getLoginUser"
+                          >login</v-btn>
+                        </v-card-actions>
+                      </v-row>
+                    </v-container>
+                  </v-col>
+                </v-row>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </div>
     </v-content>
   </v-app>
 </template>
+
+<script>
+import http from "../http-common";
+
+export default {
+  name:"UserLogin",
+  data(){
+    return{
+      clubmembers: [],
+      username: "",
+      password: "",
+      member:""
+    }
+  },
+  methods: {
+    /* eslint-disable no-console */
+    getLoginUser() {
+      http
+        .get("/clubmember" + "/" + this.username + "/" + this.password)
+        .then(response => {
+          this.clubmembers = response.data;
+          console.log(this.clubmembers);
+          this.$router.push('/dashboard')
+        })
+        .catch(e => {
+          console.log(e);
+          alert("Username/Password ไม่ถูกต้อง");
+        });
+    }
+  },
+
+};
+</script>
+
+<style>
+.img-background {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+}
+</style>
