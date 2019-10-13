@@ -45,8 +45,6 @@ public class CleanUpController {
         DayOfWeek dayOfWeek = dayOfWeekRepository.findById(dayofweek_id);
         Duration duration = durationRepository.findById(duration_id);
 
-        clubMember.setStatusmember(true);
-
         newCleanUp.setClubMember(clubMember);
         newCleanUp.setDayOfWeek(dayOfWeek);
         newCleanUp.setDuration(duration);

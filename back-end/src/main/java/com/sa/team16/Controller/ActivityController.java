@@ -23,6 +23,8 @@ public class ActivityController {
     @Autowired
     private ActivityRepository activityRepository;
     @Autowired
+    private ClubMemberRepository clubMemberRepository;
+    @Autowired
     private RegisterClubRepository registerClubRepository;
     @Autowired
     private TermRepository termRepository;
@@ -38,12 +40,13 @@ public class ActivityController {
         return activityRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/activity/{registerClubId}/{Activityname}/{TypeId}/{ActivityStartDATE}/{ActivityEndDATE}/{TermId}/{ActivityVenue}/{ActivityRecruits}")
-    public Activity newActivity(Activity newActivity, @PathVariable long registerClubId, @PathVariable long TermId,
+    @PostMapping("/activity/{clubmember_id}/{registerClubId}/{Activityname}/{TypeId}/{ActivityStartDATE}/{ActivityEndDATE}/{TermId}/{ActivityVenue}/{ActivityRecruits}")
+    public Activity newActivity(Activity newActivity,@PathVariable long clubmember_id, @PathVariable long registerClubId, @PathVariable long TermId,
             @PathVariable long TypeId, @PathVariable String Activityname, @PathVariable String ActivityStartDATE,
             @PathVariable String ActivityEndDATE, @PathVariable String ActivityVenue,
             @PathVariable long ActivityRecruits) {
 
+        ClubMember clubMember = clubMemberRepository.findById(clubmember_id);
         RegisterClub registerclub = registerClubRepository.findById(registerClubId);
         Term term = termRepository.findById(TermId);
         Type type = typeRepository.findById(TypeId);
@@ -54,6 +57,7 @@ public class ActivityController {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate EndDate = LocalDate.parse(ActivityEndDATE, format);
 
+        newActivity.setClubMember(clubMember);
         newActivity.setRegisterClub(registerclub);
         newActivity.setName(Activityname);
         newActivity.setType(type);
