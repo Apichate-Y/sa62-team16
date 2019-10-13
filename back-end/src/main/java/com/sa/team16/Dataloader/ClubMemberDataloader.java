@@ -20,7 +20,7 @@ public class ClubMemberDataloader implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		Stream.of("ประธาน", "เลขา", "รองประธาน", "เหรัญญิก").forEach(positionclub_name -> {
+		Stream.of("ประธาน", "รองประธานคนที่ 1", "รองประธานคนที่ 2", "เลขา", "เหรัญญิก", "กรรมการ", "สมาชิกทั่วไป").forEach(positionclub_name -> {
 			PositionClub positionclub = new PositionClub();
 			positionclub.setPositionclub_name(positionclub_name);
 			positionClubRepository.save(positionclub);
