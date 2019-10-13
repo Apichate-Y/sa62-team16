@@ -38,12 +38,6 @@ public class ClubMemberController {
         return clubMemberRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @GetMapping("/ClubMember")
-    public Collection<ClubMember> ClubMemberss() {
-        return clubMemberRepository.findAll().stream().filter(s -> s.getStatusmember().equals(false))
-                .collect(Collectors.toList());
-    }
-
     @GetMapping("/clubmember/{id}")
     public Optional<ClubMember> ClubMembers(@PathVariable Long id) {
         Optional<ClubMember> clubmember = clubMemberRepository.findById(id);
@@ -72,7 +66,6 @@ public class ClubMemberController {
         newclubMember.setUsername(username);
         newclubMember.setPassword(password);
         newclubMember.setRegisterDate(new Date());
-        newclubMember.setStatusmember(false);
 
         return clubMemberRepository.save(newclubMember);
     }
