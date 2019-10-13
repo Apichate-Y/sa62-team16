@@ -40,7 +40,7 @@ public class Incomecontroller {
 
     @PostMapping("/incomes/{expensename}/{clubmember_id}/{expid}/{cateid}/{stid}/{amount}")
     public Income newIncome(Income newincome, @PathVariable String expensename, @PathVariable long clubmember_id,
-            @PathVariable long amount, @PathVariable long expid, @PathVariable long cateid, @PathVariable long stid) {
+            @PathVariable Double amount, @PathVariable long expid, @PathVariable long cateid, @PathVariable long stid) {
 
         ClubMember clubMember = clubMemberRepository.findById(clubmember_id);
         Expentype expentype = expentypeRepository.findById(expid);
