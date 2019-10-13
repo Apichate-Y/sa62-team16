@@ -34,7 +34,6 @@ public class ClubMember {
     private @NonNull Long id;
     private @NonNull String username;
     private @NonNull String password;
-    private @NonNull Boolean statusmember;
 
     @Column(name = "REGISTER_DATE")
     private @NonNull Date registerDate;

@@ -53,4 +53,8 @@ public class Activity {
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Term.class)
 	@JoinColumn(name = "TermId", insertable = true)
 	private Term term;
+
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = ClubMember.class)
+	@JoinColumn(name = "CLUB_MEMBER_ID", insertable = true)
+	private ClubMember clubMember;
 }

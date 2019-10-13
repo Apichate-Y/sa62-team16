@@ -25,7 +25,7 @@ public class Income {
     @Column(name = "INCOME_ID", unique = true, nullable = true)
     private @NonNull Long id;
     private @NonNull String expensename;
-    private @NonNull Long amount;
+    private @NonNull Double amount;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Expentype.class)
     @JoinColumn(name = "EXPENTYPE_ID", insertable = true)
