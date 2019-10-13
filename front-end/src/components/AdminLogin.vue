@@ -14,10 +14,15 @@
 
                   <v-col class="text-center" md="mx-auto">
                     <v-container class="mx-auto">
+                      <v-col cols="12" sm="3">
+                        <v-btn @click="$router.push('/')" left text color="#F4511E">
+                          <v-icon left>arrow_back</v-icon>Back
+                        </v-btn>
+                      </v-col>
                       <v-row class="justify-center">
                         <v-icon size="50" color="orange darken-4">account_circle</v-icon>
                         <v-card-text>
-                          <h1>Admin</h1>
+                          <h1>ADMIN</h1>
                           <v-form>
                             <v-text-field
                               label="๊Username"

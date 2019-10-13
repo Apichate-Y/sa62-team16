@@ -8,11 +8,7 @@
             <v-layout justify-center>
               <v-flex xs12 sm md5>
                 <v-card class="elevation-10">
-                  <v-toolbar
-                    dark
-                    flat
-                    src="../assets/wallpaper-4.jpg"
-                  >
+                  <v-toolbar dark flat src="../assets/wallpaper-4.jpg">
                     <v-toolbar-title>สมัครจัดตั้งชมรม</v-toolbar-title>
                     <v-spacer></v-spacer>
                   </v-toolbar>
@@ -66,11 +62,7 @@
 
                   <v-dialog v-model="dialog" max-width="700px">
                     <v-card>
-                      <v-toolbar
-                        dark
-                        
-                        src="../assets/wallpaper-4.jpg"
-                      >
+                      <v-toolbar dark src="../assets/wallpaper-4.jpg">
                         <v-toolbar-title>สมัครจัดตั้งชมรม</v-toolbar-title>
                         <v-spacer></v-spacer>
                       </v-toolbar>
@@ -129,7 +121,7 @@
 
                         <v-row justify="center">
                           <v-card-actions>
-                            <v-btn dark  color="#4CAF50" @click="saveRegisterClubs">Save</v-btn>
+                            <v-btn dark color="#4CAF50" @click="saveRegisterClubs">Save</v-btn>
                           </v-card-actions>
                         </v-row>
                       </v-card-text>
@@ -149,7 +141,7 @@
 
 <script>
 import http from "../http-common";
-import ToolBar from "../components/ToolBar"
+import ToolBar from "../components/ToolBar";
 
 export default {
   name: "Clubs",
@@ -166,17 +158,16 @@ export default {
     RegisterClubs: {
       teacher_id: "",
       location_id: "",
-      Club_id: "",
-      
+      Club_id: ""
     },
     drawer: null,
     dialog: false,
     clubName: "",
     clubDetail: "",
-    ClubTypes:[],
-    clubs:[],
-    Teachers:[],
-    Locations:[]
+    ClubTypes: [],
+    clubs: [],
+    Teachers: [],
+    Locations: []
   }),
 
   methods: {

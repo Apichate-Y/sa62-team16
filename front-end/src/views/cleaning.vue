@@ -1,102 +1,104 @@
 <template>
   <div>
     <NavBar></NavBar>
-    <v-flex class="mt-2">
-      <v-container>
-        <v-card max-width="auto" class="mx-auto">
-          <div class="teal darken-1 text-center">
-            <v-card-title class="title white--text">จัดเวรทำความสะอาด</v-card-title>
-          </div>
-          <v-container fluid>
-            <v-form v-model="valid" ref="form">
-              <v-row align="center">
-                <v-col class="d-flex" cols="12" sm="6">
-                  <v-select
-                    label="วัน"
-                    outlined
-                    v-model="CleanUp.dayofweeks_id"
-                    :items="dayofweeks"
-                    item-text="day"
-                    item-value="id"
-                    :rules="[(v) => !!v || 'โปรดเลือกวัน']"
-                    required
-                  ></v-select>
-                </v-col>
+    <div v-if="memberCheck">
+      <v-flex class="mt-2">
+        <v-container>
+          <v-card max-width="auto" class="mx-auto">
+            <div class="teal darken-1 text-center">
+              <v-card-title class="title white--text">จัดเวรทำความสะอาด</v-card-title>
+            </div>
+            <v-container fluid>
+              <v-form v-model="valid" ref="form">
+                <v-row align="center">
+                  <v-col class="d-flex" cols="12" sm="6">
+                    <v-select
+                      label="วัน"
+                      outlined
+                      v-model="CleanUp.dayofweeks_id"
+                      :items="dayofweeks"
+                      item-text="day"
+                      item-value="id"
+                      :rules="[(v) => !!v || 'โปรดเลือกวัน']"
+                      required
+                    ></v-select>
+                  </v-col>
 
-                <v-col class="d-flex" cols="12" sm="6">
-                  <v-select
-                    label="ช่วงเวลา"
-                    outlined
-                    v-model="CleanUp.duration_id"
-                    :items="durations"
-                    item-text="durationtime"
-                    item-value="id"
-                    :rules="[(v) => !!v || 'โปรดเลือกช่วงเวลา']"
-                    required
-                  ></v-select>
-                </v-col>
+                  <v-col class="d-flex" cols="12" sm="6">
+                    <v-select
+                      label="ช่วงเวลา"
+                      outlined
+                      v-model="CleanUp.duration_id"
+                      :items="durations"
+                      item-text="durationtime"
+                      item-value="id"
+                      :rules="[(v) => !!v || 'โปรดเลือกช่วงเวลา']"
+                      required
+                    ></v-select>
+                  </v-col>
 
-                <v-col cols="12" sm="6">
-                  <v-select
-                    label="รหัสนักศึกษา"
-                    v-model="CleanUp.clubmembers_id"
-                    :items="clubmembers"
-                    item-text="user.id_student"
-                    item-value="id"
-                    :rules="[(v) => !!v || 'โปรดเลือกรหัสนักศึกษา']"
-                    required
-                    outlined
-                  ></v-select>
-                </v-col>
+                  <v-col cols="12" sm="6">
+                    <v-select
+                      label="รหัสนักศึกษา"
+                      v-model="CleanUp.clubmembers_id"
+                      :items="clubmembers"
+                      item-text="user.id_student"
+                      item-value="id"
+                      :rules="[(v) => !!v || 'โปรดเลือกรหัสนักศึกษา']"
+                      required
+                      outlined
+                    ></v-select>
+                  </v-col>
 
-                <v-col cols="12" sm="6" md="6">
-                  <v-text-field
-                    v-model="note"
-                    label="หมายเหตุ"
-                    :rules="[(v) => !!v || 'โปรดกรอกคำอธิบายหรือหมายเหตุ']"
-                    required
-                    outlined
-                  ></v-text-field>
-                </v-col>
-              </v-row>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field
+                      v-model="note"
+                      label="หมายเหตุ"
+                      :rules="[(v) => !!v || 'โปรดกรอกคำอธิบายหรือหมายเหตุ']"
+                      required
+                      outlined
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
 
-              <div class="text-center">
-                <v-btn
-                  @click="saveCleanUp"
-                  class="title"
-                  :class="{ error: !valid, primary: valid }"
-                  min-width="110"
-                  min-height="40"
-                >
-                  <v-icon left>done</v-icon>บันทึก
-                </v-btn>
-              </div>
-            </v-form>
-          </v-container>
-        </v-card>
-      </v-container>
+                <div class="text-center">
+                  <v-btn
+                    @click="saveCleanUp"
+                    class="title"
+                    :class="{ error: !valid, primary: valid }"
+                    min-width="110"
+                    min-height="40"
+                  >
+                    <v-icon left>done</v-icon>บันทึก
+                  </v-btn>
+                </div>
+              </v-form>
+            </v-container>
+          </v-card>
+        </v-container>
 
-      <v-container>
-        <v-card>
-          <div class="teal darken-1 text-center">
-            <v-card-title class="title white--text">
-              ตารางเวรทำความสะอาด
-              <v-spacer></v-spacer>
-              <v-text-field
-                class="teal lighten-5"
-                v-model="search"
-                append-icon="search"
-                label="ค้นหา"
-                single-line
-                hide-details
-              ></v-text-field>
-            </v-card-title>
-          </div>
+        <v-container>
+          <v-card>
+            <div class="teal darken-1 text-center">
+              <v-card-title class="title white--text">
+                ตารางเวรทำความสะอาด
+                <v-spacer></v-spacer>
+                <v-text-field
+                  class="teal lighten-5"
+                  v-model="search"
+                  append-icon="search"
+                  label="ค้นหา"
+                  single-line
+                  hide-details
+                ></v-text-field>
+              </v-card-title>
+            </div>
 
-          <v-data-table :headers="headers" :items="items" hide-default-footer :search="search"></v-data-table>
-        </v-card>
-      </v-container>
-    </v-flex>
+            <v-data-table :headers="headers" :items="cleanup" hide-default-footer :search="search"></v-data-table>
+          </v-card>
+        </v-container>
+      </v-flex>
+    </div>
   </div>
 </template>
 
@@ -127,13 +129,15 @@ export default {
         { text: "วัน", value: "dayOfWeek.day" },
         { text: "ช่วงเวลา", value: "duration.durationtime" }
       ],
-      items: [],
+      cleanup: [],
       dayofweeks: [],
       durations: [],
       clubmembers: [],
       search: "",
       note: "",
-      valid: false,
+      memberposition: "",
+      memberCheck: true,
+      valid: false
     };
   },
   methods: {
@@ -166,10 +170,10 @@ export default {
     // ดึงข้อมูล ClubMember ใส่ combobox
     getClubMembers() {
       http
-        .get("/ClubMember")
+        .get("/clubmember")
         .then(response => {
           this.clubmembers = response.data;
-          console.log(this.clubmembers);
+          console.log(response.data);
         })
         .catch(e => {
           console.log(e);
@@ -203,21 +207,20 @@ export default {
       http
         .get("/cleanup")
         .then(response => {
-          this.items = response.data;
-          console.log(this.items);
+          this.cleanup = response.data;
+          console.log(this.cleanup);
         })
         .catch(e => {
           console.log(e);
         });
-    },
-    refreshList() {
-      this.getDayOfWeeks();
-      this.getDurations();
-      this.getClubMembers();
-      this.getCleanUp();
     }
   },
   mounted() {
+    this.memberposition = JSON.parse(localStorage.getItem("memberposition"));
+
+    if (this.memberposition == "สมาชิกทั่วไป") {
+      this.memberCheck = false;
+    }
     this.getDayOfWeeks();
     this.getDurations();
     this.getClubMembers();

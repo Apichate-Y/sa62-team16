@@ -6,7 +6,7 @@
         <span class="font-weight-light">club</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn text @click="$router.push('/')">
+      <v-btn text @click="$router.push('/adminlogin')">
         <span>sing out</span>
         <v-icon right>mdi-export</v-icon>
       </v-btn>

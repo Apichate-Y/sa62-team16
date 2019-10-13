@@ -11,13 +11,17 @@
               <v-card class="elevation-12">
                 <v-row class="mx-auto">
                   <v-img height="mx-auto" width="325" dark src="../assets/UserTwo.jpg"></v-img>
-
                   <v-col class="text-center" md="mx-auto">
                     <v-container class="mx-auto">
+                      <v-col cols="12" sm="3">
+                        <v-btn @click="$router.push('/')" left text color="teal">
+                          <v-icon left>arrow_back</v-icon>Back
+                        </v-btn>
+                      </v-col>
                       <v-row class="justify-center">
                         <v-icon size="50" color="teal darken-4">account_circle</v-icon>
                         <v-card-text>
-                          <h1>Member</h1>
+                          <h1>MEMBER</h1>
                           <v-form>
                             <v-text-field
                               label="๊Username"
@@ -45,13 +49,7 @@
                             @click="$router.push('/registerclubmember')"
                           >Sign up</v-btn>
 
-                          <v-btn
-                            rounded
-                            color="primary"
-                            dark
-                            large
-                            @click="getLoginUser"
-                          >login</v-btn>
+                          <v-btn rounded color="primary" dark large @click="getLoginUser">login</v-btn>
                         </v-card-actions>
                       </v-row>
                     </v-container>
@@ -70,14 +68,13 @@
 import http from "../http-common";
 
 export default {
-  name:"UserLogin",
-  data(){
-    return{
+  name: "UserLogin",
+  data() {
+    return {
       clubmembers: [],
       username: "",
-      password: "",
-      member:""
-    }
+      password: ""
+    };
   },
   methods: {
     /* eslint-disable no-console */
@@ -85,17 +82,31 @@ export default {
       http
         .get("/clubmember" + "/" + this.username + "/" + this.password)
         .then(response => {
-          this.clubmembers = response.data;
-          console.log(this.clubmembers);
-          this.$router.push('/dashboard')
+          console.log(response.data);
+
+          localStorage.setItem(
+            "clubmembers_id",
+            JSON.stringify(response.data.id)
+          );
+
+          localStorage.setItem(
+            "clubname",
+            JSON.stringify(response.data.registerClub.club.clubName)
+          );
+
+          localStorage.setItem(
+            "memberposition",
+            JSON.stringify(response.data.positionClub.positionclub_name)
+          );
+
+          this.$router.push("/dashboard");
         })
         .catch(e => {
           console.log(e);
           alert("Username/Password ไม่ถูกต้อง");
         });
     }
-  },
-
+  }
 };
 </script>
 

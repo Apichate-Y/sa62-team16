@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <div>
     <v-toolbar flat class="grey lighten-5">
       <v-app-bar-nav-icon class="teal--text" @click=" drawer = !drawer "></v-app-bar-nav-icon>
       <v-toolbar-title class="text-uppercase teal--text display-1 font-weight-medium">
@@ -7,7 +7,7 @@
         <span class="font-weight-light">club</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn text class="teal--text" @click="$router.push('/userlogin')">
+      <v-btn text class="teal--text" @click="deleteStore">
         <span>Sign Out</span>
         <v-icon right>exit_to_app</v-icon>
       </v-btn>
@@ -19,11 +19,11 @@
           <v-avatar size="150">
             <img src="../assets/avatar-2.png" alt />
           </v-avatar>
-          <h1 class="title white--text headline ">Computer Club</h1>
+          <h1 class="title white--text headline">{{clubname}}</h1>
         </v-flex>
       </v-layout>
 
-      <v-divider ></v-divider>
+      <v-divider></v-divider>
 
       <v-list>
         <v-list-item v-for="item in items" :key="item.title" router :to="item.route">
@@ -36,7 +36,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-  </nav>
+  </div>
 </template>
 
 <script>
@@ -44,14 +44,24 @@ export default {
   data() {
     return {
       drawer: true,
-      member:"",
+      member: "",
       items: [
         { icon: "dashboard", title: "Dashboard", route: "/dashboard" },
         { icon: "table_chart", title: "จัดเวรทำความสะอาด", route: "/cleaning" },
         { icon: "attach_money", title: "รายรับ - รายจ่าย", route: "/income" },
         { icon: "event", title: "สร้างกิจกรรม", route: "/activities" }
-      ]
+      ],
+      clubname: ""
     };
+  },
+  methods: {
+    deleteStore() {
+      this.clubname = JSON.parse(localStorage.getItem("nameclub"));
+      this.$router.push("/userlogin");
+    }
+  },
+  mounted() {
+    this.clubname = JSON.parse(localStorage.getItem("nameclub"));
   }
 };
 </script>
